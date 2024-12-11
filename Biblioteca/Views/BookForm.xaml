@@ -2,39 +2,69 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Biblioteca.Views.BookForm"
-             Title="{Binding Title}">
-    <StackLayout 
-    VerticalOptions="CenterAndExpand"
-    Margin="15"
-    Padding="15">
+             Title="{Binding Title}"
+             BackgroundColor="#F5F5F5">
+    <ContentPage.Resources>
+        <!-- Degradado para el fondo de la página -->
+        <LinearGradientBrush x:Key="BackgroundGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#070F22" Offset="0.0" />
+            <GradientStop Color="#29395F" Offset="1.0" />
+        </LinearGradientBrush>
 
-        <ActivityIndicator 
-        IsVisible="{Binding LoadingIsVisible}"
-        IsRunning="{Binding LoadingIsVisible}"
-        Color="Blue"
-        HeightRequest="30"/>
+        <!-- Degradado para los botones -->
+        <LinearGradientBrush x:Key="ButtonGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#0D204C" Offset="0.0" />
+            <GradientStop Color="#3C4B6E" Offset="1.0" />
+        </LinearGradientBrush>
 
-        <Label Text="Nombre"/>
-        <Entry Text="{Binding Book.Title}" Margin="0,0,0,10"/>
+        <!-- Estilo común para los botones -->
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource ButtonGradient}" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="Padding" Value="15,10" />
+        </Style>
+    </ContentPage.Resources>
 
-        <Label Text="Descripcion"/>
-        <Entry Text="{Binding Book.Description}" Margin="0,0,0,10"/>
+    <Grid Background="{StaticResource BackgroundGradient}">
+        <ScrollView>
+            <Frame Margin="20" Padding="20" BackgroundColor="#80000000" CornerRadius="20">
+                <StackLayout Spacing="20">
+                    <!-- Indicador de carga -->
+                    <ActivityIndicator 
+                        IsVisible="{Binding LoadingIsVisible}"
+                        IsRunning="{Binding LoadingIsVisible}"
+                        Color="White"
+                        HeightRequest="30"/>
 
-        <Label Text="ISBN"/>
-        <Entry Text="{Binding Book.Isbn}" Margin="0,0,0,10"/>
+                    <!-- Campo: Nombre -->
+                    <Label Text="Nombre" TextColor="White" FontAttributes="Bold" FontSize="18"/>
+                    <Entry Text="{Binding Book.Title}" BackgroundColor="Transparent" />
 
-        <Label Text="Genero"/>
-        <Entry Text="{Binding Book.Gender}" Margin="0,0,0,10"/>
+                    <!-- Campo: Descripción -->
+                    <Label Text="Descripción" TextColor="White" FontAttributes="Bold" FontSize="18"/>
+                    <Entry Text="{Binding Book.Description}" BackgroundColor="Transparent" />
 
-        <Label Text="Autor"/>
-        <Picker Title="Seleccionar autor"
-                ItemsSource="{Binding Authors}"
-                SelectedItem="{Binding SelectedAuthor}"
-                ItemDisplayBinding="{Binding Fullname}"/>
-                
+                    <!-- Campo: ISBN -->
+                    <Label Text="ISBN" TextColor="White" FontAttributes="Bold" FontSize="18"/>
+                    <Entry Text="{Binding Book.Isbn}" BackgroundColor="Transparent" />
 
-        <Button Text="Guardar" Command="{Binding SaveCommand}" BackgroundColor="Green"/>
+                    <!-- Campo: Género -->
+                    <Label Text="Género" TextColor="White" FontAttributes="Bold" FontSize="18"/>
+                    <Entry Text="{Binding Book.Gender}" BackgroundColor="Transparent" />
 
+                    <!-- Campo: Autor -->
+                    <Label Text="Autor" TextColor="White" FontAttributes="Bold" FontSize="18"/>
+                    <Picker Title="Seleccionar autor"
+                            ItemsSource="{Binding Authors}"
+                            SelectedItem="{Binding SelectedAuthor}"
+                            ItemDisplayBinding="{Binding Fullname}" />
 
-    </StackLayout>
+                    <!-- Botón: Guardar -->
+                    <Button Text="Guardar" Command="{Binding SaveCommand}" Style="{StaticResource ButtonStyle}" HeightRequest="50" />
+                </StackLayout>
+            </Frame>
+        </ScrollView>
+    </Grid>
 </ContentPage>

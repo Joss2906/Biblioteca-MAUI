@@ -3,26 +3,54 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Biblioteca.Views.Splash"
              NavigationPage.HasNavigationBar="False"
-             Title="">
+             BackgroundColor="#070F22">
+    <!-- Fondo general -->
 
-    <StackLayout 
-        VerticalOptions="CenterAndExpand" 
-        Margin="15"
-        Padding="15"
-        >
+    <VerticalStackLayout VerticalOptions="CenterAndExpand" Spacing="30" Padding="20">
         <Label
-            Text="LIBRARY"
-            FontSize="Title"
-            VerticalOptions="Center"
+    Text="LIBRARY"
+    FontSize="48"
+    FontAttributes="Bold"
+    HorizontalOptions="Center"
+    TextColor="White" />
+
+        <!-- Header con Fondo Arena y Logotipo -->
+        <Frame 
+            BackgroundColor="#0D204C" 
+            CornerRadius="20"
+            HeightRequest="250"
+            VerticalOptions="Start"
+            HorizontalOptions="FillAndExpand"
+            HasShadow="True"
+            Padding="10">
+            <Image 
+                Source="logo_book.png" 
+                HeightRequest="150"
+                WidthRequest="150"
+                Aspect="AspectFit"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+        </Frame>
+
+        <!-- Título -->
+
+
+        <!-- Subtítulo -->
+        <Label
+            Text="Your gateway to endless knowledge"
+            FontSize="18"
             HorizontalOptions="Center"
+            TextColor="White" />
+
+        <!-- Botón -->
+        <Button 
+            Text="Get Started"
+            BackgroundColor="#0D204C"
+            TextColor="White"
+            CornerRadius="25"
+            FontSize="18"
             FontAttributes="Bold"
-            TextColor="Purple"
-            />
-        <Image Source="logo_book.png" 
-               HorizontalOptions="Center"
-               VerticalOptions="Center"/>
-        <Button Text="Get Started" Padding="15"
-                BackgroundColor="Purple"
-                Clicked="OnGetStartedClicked"/>
-    </StackLayout>
+            Clicked="OnGetStartedClicked"
+            HorizontalOptions="Center" />
+    </VerticalStackLayout>
 </ContentPage>

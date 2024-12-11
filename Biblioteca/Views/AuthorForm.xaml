@@ -2,32 +2,56 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Biblioteca.Views.AuthorForm"
-             Title="{Binding Title}">
-    <StackLayout 
-        VerticalOptions="CenterAndExpand"
-        Margin="15"
-        Padding="15">
+             Title="{Binding Title}"
+             BackgroundColor="#F5F5F5">
+    <ContentPage.Resources>
+        <!-- Degradado para el fondo de la página -->
+        <LinearGradientBrush x:Key="BackgroundGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#070F22" Offset="0.0" />
+            <GradientStop Color="#29395F" Offset="1.0" />
+        </LinearGradientBrush>
 
-        <ActivityIndicator 
-        IsVisible="{Binding LoadingIsVisible}"
-        IsRunning="{Binding LoadingIsVisible}"
-        Color="Blue"
-        HeightRequest="30"/>
+        <!-- Degradado para los botones -->
+        <LinearGradientBrush x:Key="ButtonGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#0D204C" Offset="0.0" />
+            <GradientStop Color="#3C4B6E" Offset="1.0" />
+        </LinearGradientBrush>
 
-        <Label Text="Nombre"/>
-        <Entry Text="{Binding Author.Name}" Margin="0,0,0,10"/>
+        <!-- Estilo común para los botones -->
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource ButtonGradient}" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="Padding" Value="15,10" />
+        </Style>
+    </ContentPage.Resources>
 
-        <Label Text="Apellido"/>
-        <Entry Text="{Binding Author.Lastname}" Margin="0,0,0,10"/>
+    <Grid Background="{StaticResource BackgroundGradient}">
+        <ScrollView>
+            <Frame Margin="20" Padding="20" BackgroundColor="#80000000" CornerRadius="20">
+                <StackLayout Spacing="20">
+                    <ActivityIndicator 
+                        IsVisible="{Binding LoadingIsVisible}"
+                        IsRunning="{Binding LoadingIsVisible}"
+                        Color="Blue"
+                        HeightRequest="30" />
 
-        <Label Text="Direccion"/>
-        <Entry Text="{Binding Author.Address}" Margin="0,0,0,10"/>
+                    <Label Text="Nombre" TextColor="White" FontAttributes="Bold" FontSize="18" />
+                    <Entry Text="{Binding Author.Name}" Margin="0,0,0,10" BackgroundColor="Transparent" />
 
-        <Label Text="Ciudad"/>
-        <Entry Text="{Binding Author.City}" Margin="0,0,0,10"/>
+                    <Label Text="Apellido" TextColor="White" FontAttributes="Bold" FontSize="18" />
+                    <Entry Text="{Binding Author.Lastname}" Margin="0,0,0,10" BackgroundColor="Transparent" />
 
-        <Button Text="Guardar" Command="{Binding SaveCommand}" BackgroundColor="Green"/>
+                    <Label Text="Dirección" TextColor="White" FontAttributes="Bold" FontSize="18" />
+                    <Entry Text="{Binding Author.Address}" Margin="0,0,0,10" BackgroundColor="Transparent" />
 
+                    <Label Text="Ciudad" TextColor="White" FontAttributes="Bold" FontSize="18" />
+                    <Entry Text="{Binding Author.City}" Margin="0,0,0,10" BackgroundColor="Transparent" />
 
-    </StackLayout>
+                    <Button Text="Guardar" Command="{Binding SaveCommand}" Style="{StaticResource ButtonStyle}" HeightRequest="50" />
+                </StackLayout>
+            </Frame>
+        </ScrollView>
+    </Grid>
 </ContentPage>

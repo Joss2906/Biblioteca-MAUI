@@ -3,75 +3,70 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Biblioteca.Views.LoansList"
              xmlns:model="clr-namespace:Biblioteca.Models"
-             Title="Préstamos">
-    <Grid RowDefinitions="Auto,Auto,*" RowSpacing="15" Margin="15">
+             Title="Préstamos"
+             BackgroundColor="#F5F5F5">
 
-        <Button Grid.Row="0" Text="Nuevo Préstamo" Command="{Binding CreateCommand}"/>
-        <!--<Label Grid.Row="1" Text="Lista de Divisas" FontSize="Subtitle"/>-->
+    <ContentPage.Resources>
+        <!-- Degradado para el fondo de la página -->
+        <LinearGradientBrush x:Key="BackgroundGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#070F22" Offset="0.0" />
+            <GradientStop Color="#29395F" Offset="1.0" />
+        </LinearGradientBrush>
 
-        <ScrollView Grid.Row="2">
+        <!-- Degradado para los botones -->
+        <LinearGradientBrush x:Key="ButtonGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#0D204C" Offset="0.0" />
+            <GradientStop Color="#3C4B6E" Offset="1.0" />
+        </LinearGradientBrush>
 
+        <!-- Estilo común para los botones -->
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource ButtonGradient}" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="Padding" Value="15,10" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid Background="{StaticResource BackgroundGradient}" RowDefinitions="Auto,*">
+        <!-- Botón "Nuevo Préstamo" -->
+        <Button Grid.Row="0" Text="Nuevo Préstamo" Command="{Binding CreateCommand}" Style="{StaticResource ButtonStyle}" HeightRequest="50" Margin="20" />
+
+        <!-- Lista de préstamos -->
+        <ScrollView Grid.Row="1">
             <CollectionView ItemsSource="{Binding LoanList}">
                 <CollectionView.ItemsLayout>
-                    <LinearItemsLayout ItemSpacing="5" Orientation="Vertical"/>
+                    <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
                 </CollectionView.ItemsLayout>
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Loan">
-                        <Border Padding="10,5" HorizontalOptions="FillAndExpand">
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="5"/>
-                            </Border.StrokeShape>
+                        <Frame BackgroundColor="#1AFFFFFF" CornerRadius="10" Padding="15" Margin="20,10">
+                            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="*,Auto">
+                                <Label Grid.Row="0" Grid.Column="0" Text="Libro:" FontAttributes="Bold" TextColor="White" />
+                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Title}" TextColor="White" HorizontalOptions="End" />
 
-                            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto"
-                        ColumnDefinitions="Auto,*"
-                        >
+                                <Label Grid.Row="1" Grid.Column="0" Text="Usuario:" FontAttributes="Bold" TextColor="White" />
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Name}" TextColor="White" HorizontalOptions="End" />
 
-                                <Label Grid.Row="0" Grid.Column="0"
-                        Text="Libro:" FontAttributes="Bold"/>
-                                <Label Grid.Row="0" Grid.Column="1" HorizontalOptions="End"
-                        Text="{Binding Title}" />
+                                <Label Grid.Row="2" Grid.Column="0" Text="Estatus:" FontAttributes="Bold" TextColor="White" />
+                                <Label Grid.Row="2" Grid.Column="1" Text="{Binding Status}" TextColor="White" HorizontalOptions="End" />
 
-                                <Label Grid.Row="1" Grid.Column="0"
-                        Text="Usuario:" FontAttributes="Bold"/>
-                                <Label Grid.Row="1" Grid.Column="1" HorizontalOptions="End"
-                        Text="{Binding Name}" />
+                                <Label Grid.Row="3" Grid.Column="0" Text="Fecha:" FontAttributes="Bold" TextColor="White" />
+                                <Label Grid.Row="3" Grid.Column="1" Text="{Binding Fecha}" TextColor="White" HorizontalOptions="End" />
 
-                                <Label Grid.Row="2" Grid.Column="0"
-                        Text="Estatus:" FontAttributes="Bold"/>
-                                <Label Grid.Row="2" Grid.Column="1" HorizontalOptions="End"
-                        Text="{Binding Status}" />
-
-                                <Label Grid.Row="3" Grid.Column="0"
-                        Text="Fecha:" FontAttributes="Bold"/>
-                                <Label Grid.Row="3" Grid.Column="1" HorizontalOptions="End"
-                        Text="{Binding Fecha}" />
-
-                                <Label Grid.Row="4" Grid.Column="0" Padding="0,15,10,5"
-                           Text="Editar" TextColor="Blue"
-                           >
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer 
-                                Command="{Binding BindingContext.UpdateCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
-                                CommandParameter="{Binding}"
-                                />
-                                    </Label.GestureRecognizers>
-
-                                </Label>
-                                <Label Grid.Row="4" Grid.Column="1" Padding="10,15,0,5"
-                           Text="Eliminar" TextColor="Red" HorizontalOptions="End"
-                           >
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer 
-                            Command="{Binding BindingContext.DeleteCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
-                            CommandParameter="{Binding}"
-                            />
-                                    </Label.GestureRecognizers>
-                                </Label>
+                                <StackLayout Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="20" Margin="0,15,0,0">
+                                    <Button Text="Editar" Style="{StaticResource ButtonStyle}"
+                                            Command="{Binding BindingContext.UpdateCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                            CommandParameter="{Binding}" />
+                                    <Button Text="Eliminar" Style="{StaticResource ButtonStyle}"
+                                            Command="{Binding BindingContext.DeleteCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                            CommandParameter="{Binding}" />
+                                </StackLayout>
                             </Grid>
-                        </Border>
+                        </Frame>
                     </DataTemplate>
-
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </ScrollView>

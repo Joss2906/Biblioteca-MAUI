@@ -2,36 +2,69 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Biblioteca.Views.LoanForm"
-             Title="{Binding Title}">
-    <StackLayout 
-        VerticalOptions="CenterAndExpand"
-        Margin="15"
-        Padding="15">
+             Title="{Binding Title}"
+             BackgroundColor="#F5F5F5">
+    <ContentPage.Resources>
+        <!-- Degradado para el fondo de la página -->
+        <LinearGradientBrush x:Key="BackgroundGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#070F22" Offset="0.0" />
+            <GradientStop Color="#29395F" Offset="1.0" />
+        </LinearGradientBrush>
 
-        <ActivityIndicator 
-        IsVisible="{Binding LoadingIsVisible}"
-        IsRunning="{Binding LoadingIsVisible}"
-        Color="Blue"
-        HeightRequest="30"/>
+        <!-- Degradado para los botones -->
+        <LinearGradientBrush x:Key="ButtonGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#0D204C" Offset="0.0" />
+            <GradientStop Color="#3C4B6E" Offset="1.0" />
+        </LinearGradientBrush>
 
-        <Label Text="Libro"/>
-        <Picker Title="Seleccionar libro"
-            ItemsSource="{Binding Books}"
-            SelectedItem="{Binding SelectedBook}"
-            ItemDisplayBinding="{Binding Title}"/>
+        <!-- Estilo común para los botones -->
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource ButtonGradient}" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="Padding" Value="15,10" />
+        </Style>
+    </ContentPage.Resources>
 
-        <Label Text="Usuario"/>
-        <Picker Title="Seleccionar usuario"
-            ItemsSource="{Binding Users}"
-            SelectedItem="{Binding SelectedUser}"
-            ItemDisplayBinding="{Binding Name}"
-                />
+    <Grid Background="{StaticResource BackgroundGradient}">
+        <ScrollView>
+            <Frame Margin="20" Padding="20" BackgroundColor="#80000000" CornerRadius="20">
+                <StackLayout Spacing="20">
+                    <ActivityIndicator 
+                        IsVisible="{Binding LoadingIsVisible}"
+                        IsRunning="{Binding LoadingIsVisible}"
+                        Color="Blue"
+                        HeightRequest="30" />
 
-        <Label Text="Estatus"/>
-        <Entry Text="{Binding Loan.Status}" Margin="0,0,0,10"/>
+                    <Label Text="Libro" TextColor="White" FontAttributes="Bold" FontSize="18" />
+                    <Picker Title="Seleccionar libro"
+                        ItemsSource="{Binding Books}"
+                        SelectedItem="{Binding SelectedBook}"
+                        ItemDisplayBinding="{Binding Title}"
+                        BackgroundColor="Transparent"
+                        TextColor="White"/>
 
-        <Button Text="Guardar" Command="{Binding SaveCommand}" BackgroundColor="Green"/>
+                    <Label Text="Usuario" TextColor="White" FontAttributes="Bold" FontSize="18" />
+                    <Picker Title="Seleccionar usuario"
+                        ItemsSource="{Binding Users}"
+                        SelectedItem="{Binding SelectedUser}"
+                        ItemDisplayBinding="{Binding Name}"
+                        BackgroundColor="Transparent"
+                        TextColor="White"/>
 
+                    <Label Text="Estatus" TextColor="White" FontAttributes="Bold" FontSize="18" />
+                    <Entry Text="{Binding Loan.Status}" 
+                           Margin="0,0,0,10" 
+                           BackgroundColor="Transparent"
+                           TextColor="White"/>
 
-    </StackLayout>
+                    <Button Text="Guardar" 
+                            Command="{Binding SaveCommand}" 
+                            Style="{StaticResource ButtonStyle}" 
+                            HeightRequest="50" />
+                </StackLayout>
+            </Frame>
+        </ScrollView>
+    </Grid>
 </ContentPage>

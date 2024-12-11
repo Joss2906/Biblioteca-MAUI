@@ -7,49 +7,50 @@
     Shell.FlyoutBehavior="Flyout"
     Title="Biblioteca">
 
-    <!--<ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:Views.Splash}"
-        Route="Splash" />-->
+    <!-- Recursos de estilo -->
+    <Shell.Resources>
+        <!-- Degradado para el fondo del Flyout -->
+        <LinearGradientBrush x:Key="FlyoutBackgroundGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#070F22" Offset="0.0" />
+            <GradientStop Color="#29395F" Offset="1.0" />
+        </LinearGradientBrush>
 
-    <!--<FlyoutItem
-        Title="Home"
-        Route="Home">
-        <ShellContent
-            ContentTemplate="{DataTemplate local:Views.Splash}"
-            Route="Splash" />
-    </FlyoutItem>-->
+        <!-- Estilo para FlyoutItem -->
+        <Style TargetType="FlyoutItem">
+            <Setter Property="Title" Value="White" />
+        </Style>
+    </Shell.Resources>
 
-    <FlyoutItem
-        Title="Libros"
-        Route="Books">
+    <!-- Fondo del menú Flyout -->
+    <Shell.FlyoutBackground>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#0D204C" Offset="0.0" />
+            <GradientStop Color="#3C4B6E" Offset="1.0" />
+        </LinearGradientBrush>
+    </Shell.FlyoutBackground>
+
+    <!-- Menú de navegación -->
+    <FlyoutItem Title="Libros" Route="Books" Icon="book_icon.png">
         <ShellContent
             ContentTemplate="{DataTemplate local:Views.BooksList}"
             Route="BooksList" />
     </FlyoutItem>
 
-    <FlyoutItem
-        Title="Autores"
-        Route="Authors">
+    <FlyoutItem Title="Autores" Route="Authors" Icon="author_icon.png">
         <ShellContent
             ContentTemplate="{DataTemplate local:Views.AuthorsList}"
             Route="AuthorsList" />
     </FlyoutItem>
 
-    <FlyoutItem
-        Title="Prestamos"
-        Route="Loans">
+    <FlyoutItem Title="Préstamos" Route="Loans" Icon="loans_icon.png">
         <ShellContent
             ContentTemplate="{DataTemplate local:Views.LoansList}"
             Route="LoansList" />
     </FlyoutItem>
 
-    <FlyoutItem
-        Title="Usuarios"
-        Route="Users">
-            <ShellContent
+    <FlyoutItem Title="Usuarios" Route="Users" Icon="users_icon.png">
+        <ShellContent
             ContentTemplate="{DataTemplate local:Views.UserList}"
             Route="UserList" />
     </FlyoutItem>
-
 </Shell>
