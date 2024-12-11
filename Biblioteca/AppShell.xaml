@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Biblioteca.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Biblioteca"
+    Shell.FlyoutBehavior="Flyout"
+    Title="Biblioteca">
+
+    <!--<ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:Views.Splash}"
+        Route="Splash" />-->
+
+    <!--<FlyoutItem
+        Title="Home"
+        Route="Home">
+        <ShellContent
+            ContentTemplate="{DataTemplate local:Views.Splash}"
+            Route="Splash" />
+    </FlyoutItem>-->
+
+    <FlyoutItem
+        Title="Books"
+        Route="Books">
+        <ShellContent
+            ContentTemplate="{DataTemplate local:Views.BooksList}"
+            Route="BooksList" />
+    </FlyoutItem>
+
+    <FlyoutItem
+        Title="Authors"
+        Route="Authors">
+        <ShellContent
+            ContentTemplate="{DataTemplate local:Views.AuthorsList}"
+            Route="AuthorsList" />
+    </FlyoutItem>
+
+    <FlyoutItem
+        Title="Loans"
+        Route="Loans">
+        <ShellContent
+            ContentTemplate="{DataTemplate local:Views.LoansList}"
+            Route="LoansList" />
+    </FlyoutItem>
+
+    <FlyoutItem
+        Title="Users"
+        Route="Users">
+            <ShellContent
+            ContentTemplate="{DataTemplate local:Views.UserList}"
+            Route="UserList" />
+    </FlyoutItem>
+
+</Shell>

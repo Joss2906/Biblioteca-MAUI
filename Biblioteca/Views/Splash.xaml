@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Biblioteca.Views.Splash"
+             NavigationPage.HasNavigationBar="False"
+             Title="">
+
+    <StackLayout 
+        VerticalOptions="CenterAndExpand" 
+        Margin="15"
+        Padding="15"
+        >
+        <Label
+            Text="LIBRARY"
+            FontSize="Title"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            FontAttributes="Bold"
+            TextColor="Purple"
+            />
+        <Image Source="logo_book.png" 
+               HorizontalOptions="Center"
+               VerticalOptions="Center"/>
+        <Button Text="Get Started" Padding="15"
+                BackgroundColor="Purple"
+                Clicked="OnGetStartedClicked"/>
+    </StackLayout>
+</ContentPage>
