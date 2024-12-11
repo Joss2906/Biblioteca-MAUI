@@ -8,11 +8,11 @@
         Margin="15"
         Padding="15">
 
-        <!--<ActivityIndicator 
+        <ActivityIndicator 
         IsVisible="{Binding LoadingIsVisible}"
         IsRunning="{Binding LoadingIsVisible}"
         Color="Blue"
-        HeightRequest="30"/>-->
+        HeightRequest="30"/>
 
         <Label Text="Nombre"/>
         <Entry Text="{Binding Author.Name}" Margin="0,0,0,10"/>

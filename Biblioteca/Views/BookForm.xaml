@@ -2,11 +2,39 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Biblioteca.Views.BookForm"
-             Title="BookForm">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="{Binding Title}">
+    <StackLayout 
+    VerticalOptions="CenterAndExpand"
+    Margin="15"
+    Padding="15">
+
+        <ActivityIndicator 
+        IsVisible="{Binding LoadingIsVisible}"
+        IsRunning="{Binding LoadingIsVisible}"
+        Color="Blue"
+        HeightRequest="30"/>
+
+        <Label Text="Nombre"/>
+        <Entry Text="{Binding Book.Title}" Margin="0,0,0,10"/>
+
+        <Label Text="Descripcion"/>
+        <Entry Text="{Binding Book.Description}" Margin="0,0,0,10"/>
+
+        <Label Text="ISBN"/>
+        <Entry Text="{Binding Book.Isbn}" Margin="0,0,0,10"/>
+
+        <Label Text="Genero"/>
+        <Entry Text="{Binding Book.Gender}" Margin="0,0,0,10"/>
+
+        <Label Text="Autor"/>
+        <Picker Title="Seleccionar autor"
+                ItemsSource="{Binding Authors}"
+                SelectedItem="{Binding SelectedAuthor}"
+                ItemDisplayBinding="{Binding Fullname}"/>
+                
+
+        <Button Text="Guardar" Command="{Binding SaveCommand}" BackgroundColor="Green"/>
+
+
+    </StackLayout>
 </ContentPage>

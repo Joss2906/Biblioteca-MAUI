@@ -16,7 +16,14 @@ namespace Biblioteca.Models
         [ObservableProperty]
         public int user_id;
         [ObservableProperty]
-        public int status;
+        public string status;
+
+        [ObservableProperty]
+        public string title;
+        [ObservableProperty]
+        public string name;
+        [ObservableProperty]
+        public string fecha;
 
     }
 }

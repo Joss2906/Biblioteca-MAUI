@@ -23,5 +23,8 @@ namespace Biblioteca.Models
         public int author_id;
         [ObservableProperty]
         public int status;
+
+        [ObservableProperty]
+        public string author;
     }
 }

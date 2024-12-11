@@ -2,11 +2,78 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Biblioteca.Views.LoansList"
-             Title="LoansList">
-    <VerticalStackLayout>
-        <Label 
-            Text="Loans"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:model="clr-namespace:Biblioteca.Models"
+             Title="Préstamos">
+    <Grid RowDefinitions="Auto,Auto,*" RowSpacing="15" Margin="15">
+
+        <Button Grid.Row="0" Text="Nuevo Préstamo" Command="{Binding CreateCommand}"/>
+        <!--<Label Grid.Row="1" Text="Lista de Divisas" FontSize="Subtitle"/>-->
+
+        <ScrollView Grid.Row="2">
+
+            <CollectionView ItemsSource="{Binding LoanList}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="5" Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Loan">
+                        <Border Padding="10,5" HorizontalOptions="FillAndExpand">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="5"/>
+                            </Border.StrokeShape>
+
+                            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+                        ColumnDefinitions="Auto,*"
+                        >
+
+                                <Label Grid.Row="0" Grid.Column="0"
+                        Text="Libro:" FontAttributes="Bold"/>
+                                <Label Grid.Row="0" Grid.Column="1" HorizontalOptions="End"
+                        Text="{Binding Title}" />
+
+                                <Label Grid.Row="1" Grid.Column="0"
+                        Text="Usuario:" FontAttributes="Bold"/>
+                                <Label Grid.Row="1" Grid.Column="1" HorizontalOptions="End"
+                        Text="{Binding Name}" />
+
+                                <Label Grid.Row="2" Grid.Column="0"
+                        Text="Estatus:" FontAttributes="Bold"/>
+                                <Label Grid.Row="2" Grid.Column="1" HorizontalOptions="End"
+                        Text="{Binding Status}" />
+
+                                <Label Grid.Row="3" Grid.Column="0"
+                        Text="Fecha:" FontAttributes="Bold"/>
+                                <Label Grid.Row="3" Grid.Column="1" HorizontalOptions="End"
+                        Text="{Binding Fecha}" />
+
+                                <Label Grid.Row="4" Grid.Column="0" Padding="0,15,10,5"
+                           Text="Editar" TextColor="Blue"
+                           >
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                Command="{Binding BindingContext.UpdateCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                CommandParameter="{Binding}"
+                                />
+                                    </Label.GestureRecognizers>
+
+                                </Label>
+                                <Label Grid.Row="4" Grid.Column="1" Padding="10,15,0,5"
+                           Text="Eliminar" TextColor="Red" HorizontalOptions="End"
+                           >
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                            Command="{Binding BindingContext.DeleteCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                            CommandParameter="{Binding}"
+                            />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+    </Grid>
 </ContentPage>

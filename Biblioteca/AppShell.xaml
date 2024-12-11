@@ -21,7 +21,7 @@
     </FlyoutItem>-->
 
     <FlyoutItem
-        Title="Books"
+        Title="Libros"
         Route="Books">
         <ShellContent
             ContentTemplate="{DataTemplate local:Views.BooksList}"
@@ -29,7 +29,7 @@
     </FlyoutItem>
 
     <FlyoutItem
-        Title="Authors"
+        Title="Autores"
         Route="Authors">
         <ShellContent
             ContentTemplate="{DataTemplate local:Views.AuthorsList}"
@@ -37,7 +37,7 @@
     </FlyoutItem>
 
     <FlyoutItem
-        Title="Loans"
+        Title="Prestamos"
         Route="Loans">
         <ShellContent
             ContentTemplate="{DataTemplate local:Views.LoansList}"
@@ -45,7 +45,7 @@
     </FlyoutItem>
 
     <FlyoutItem
-        Title="Users"
+        Title="Usuarios"
         Route="Users">
             <ShellContent
             ContentTemplate="{DataTemplate local:Views.UserList}"

@@ -20,5 +20,8 @@ namespace Biblioteca.Models
         public string address;
         [ObservableProperty]
         public string city;
+
+        [ObservableProperty]
+        public string fullname;
     }
 }

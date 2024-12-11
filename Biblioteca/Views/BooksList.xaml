@@ -2,11 +2,83 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Biblioteca.Views.BooksList"
-             Title="BooksList">
-    <VerticalStackLayout>
-        <Label 
-            Text="Books"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:model="clr-namespace:Biblioteca.Models"
+             Title="Libros">
+    <Grid RowDefinitions="Auto,Auto,*" RowSpacing="15" Margin="15">
+
+        <Button Grid.Row="0" Text="Nuevo Libro" Command="{Binding CreateCommand}"/>
+        <!--<Label Grid.Row="1" Text="Lista de Divisas" FontSize="Subtitle"/>-->
+
+        <ScrollView Grid.Row="2">
+
+            <CollectionView ItemsSource="{Binding BookList}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="5" Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Book">
+                        <Border Padding="10,5" HorizontalOptions="FillAndExpand">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="5"/>
+                            </Border.StrokeShape>
+
+                            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+                            ColumnDefinitions="Auto,*"
+                            >
+
+                            <Label Grid.Row="0" Grid.Column="0"
+                            Text="Nombre:" FontAttributes="Bold"/>
+                            <Label Grid.Row="0" Grid.Column="1" HorizontalOptions="End"
+                            Text="{Binding Title}" />
+
+                            <Label Grid.Row="1" Grid.Column="0"
+                            Text="Descripción:" FontAttributes="Bold"/>
+                            <Label Grid.Row="1" Grid.Column="1" HorizontalOptions="End"
+                            Text="{Binding Description}" />
+
+                            <Label Grid.Row="2" Grid.Column="0"
+                            Text="ISBN:" FontAttributes="Bold"/>
+                            <Label Grid.Row="2" Grid.Column="1" HorizontalOptions="End"
+                            Text="{Binding Isbn}" />
+
+                            <Label Grid.Row="3" Grid.Column="0"
+                            Text="Genero:" FontAttributes="Bold"/>
+                            <Label Grid.Row="3" Grid.Column="1" HorizontalOptions="End"
+                            Text="{Binding Gender}" />
+
+                                <Label Grid.Row="4" Grid.Column="0"
+                                Text="Autor:" FontAttributes="Bold"/>
+                                <Label Grid.Row="4" Grid.Column="1" HorizontalOptions="End"
+                                Text="{Binding Author}" />
+
+                                <Label Grid.Row="5" Grid.Column="0" Padding="0,15,10,5"
+                               Text="Editar" TextColor="Blue"
+                               >
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                    Command="{Binding BindingContext.UpdateCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                    CommandParameter="{Binding}"
+                                    />
+                                    </Label.GestureRecognizers>
+
+                                </Label>
+                                <Label Grid.Row="5" Grid.Column="1" Padding="10,15,0,5"
+                               Text="Eliminar" TextColor="Red" HorizontalOptions="End"
+                               >
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                Command="{Binding BindingContext.DeleteCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                CommandParameter="{Binding}"
+                                />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+    </Grid>
 </ContentPage>
