@@ -24,5 +24,7 @@ namespace Biblioteca.Models
         public string roles;
         [ObservableProperty]
         public string name;
+        [ObservableProperty]
+        public string rol;
     }
 }
