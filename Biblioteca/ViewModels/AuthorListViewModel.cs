@@ -25,7 +25,7 @@ namespace Biblioteca.ViewModels
         //json_object json_object = new json_object();
         private static readonly HttpClient client = new HttpClient
         {
-            BaseAddress = new Uri("http://192.168.1.8:8000/api/")
+            BaseAddress = new Uri("http://192.168.34.36:8000/api/")
         };
 
         public AuthorListViewModel()
