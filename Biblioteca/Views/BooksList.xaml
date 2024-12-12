@@ -16,7 +16,7 @@
         <!-- Degradado para los botones -->
         <LinearGradientBrush x:Key="ButtonGradient" StartPoint="0,0" EndPoint="1,1">
             <GradientStop Color="#0D204C" Offset="0.0" />
-            <GradientStop Color="#3C4B6E" Offset="1.0" />
+            <GradientStop Color="#5A0002" Offset="1.0" />
         </LinearGradientBrush>
 
         <!-- Estilo común para los botones -->

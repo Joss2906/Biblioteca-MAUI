@@ -2,11 +2,68 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Biblioteca.Views.UserForm"
-             Title="UserForm">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="{Binding Title}"
+             BackgroundColor="#F5F5F5">
+    <ContentPage.Resources>
+        <!-- Degradado para el fondo de la página -->
+        <LinearGradientBrush x:Key="BackgroundGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#070F22" Offset="0.0" />
+            <GradientStop Color="#29395F" Offset="1.0" />
+        </LinearGradientBrush>
+
+        <!-- Degradado para los botones -->
+        <LinearGradientBrush x:Key="ButtonGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#0D204C" Offset="0.0" />
+            <GradientStop Color="#3C4B6E" Offset="1.0" />
+        </LinearGradientBrush>
+
+        <!-- Estilo común para los botones -->
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource ButtonGradient}" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="Padding" Value="15,10" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid Background="{StaticResource BackgroundGradient}">
+        <ScrollView>
+            <Frame Margin="20" Padding="20" BackgroundColor="#80000000" CornerRadius="20">
+                <StackLayout Spacing="20">
+                    <ActivityIndicator 
+                        IsVisible="{Binding LoadingIsVisible}"
+                        IsRunning="{Binding LoadingIsVisible}"
+                        Color="Blue"
+                        HeightRequest="30" />
+
+                    <Label Text="Nombre" TextColor="White" FontAttributes="Bold" FontSize="18" />
+                    <Entry Text="{Binding User.Name}" 
+                       Margin="0,0,0,10" 
+                       BackgroundColor="Transparent"
+                       TextColor="White"/>
+
+                    <Label Text="Email" TextColor="White" FontAttributes="Bold" FontSize="18" />
+                    <Entry Text="{Binding User.Email}" 
+                       Margin="0,0,0,10" 
+                       BackgroundColor="Transparent"
+                       TextColor="White"/>
+
+                   
+                    <Label Text="Rol" TextColor="White" FontAttributes="Bold" FontSize="18" />
+                    <Picker Title="Seleccionar rol"
+                        ItemsSource="{Binding Roles}"
+                        SelectedItem="{Binding SelectedRole}"
+                        ItemDisplayBinding="{Binding Rol}"
+                        BackgroundColor="Transparent"
+                        TextColor="White"/>
+
+                    <Button Text="Guardar" 
+                            Command="{Binding SaveCommand}" 
+                            Style="{StaticResource ButtonStyle}" 
+                            HeightRequest="50" />
+                </StackLayout>
+            </Frame>
+        </ScrollView>
+    </Grid>
 </ContentPage>

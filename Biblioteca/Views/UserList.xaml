@@ -1,12 +1,75 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:Biblioteca.Models"
              x:Class="Biblioteca.Views.UserList"
-             Title="UserList">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Usuarios"
+             BackgroundColor="#F5F5F5">
+
+    <ContentPage.Resources>
+        <!-- Degradado para el fondo de la página -->
+        <LinearGradientBrush x:Key="BackgroundGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#070F22" Offset="0.0" />
+            <GradientStop Color="#29395F" Offset="1.0" />
+        </LinearGradientBrush>
+
+        <!-- Degradado para los botones -->
+        <LinearGradientBrush x:Key="ButtonGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#0D204C" Offset="0.0" />
+            <GradientStop Color="#5A0002" Offset="1.0" />
+        </LinearGradientBrush>
+
+        <!-- Estilo común para los botones -->
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource ButtonGradient}" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="Padding" Value="15,10" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid Background="{StaticResource BackgroundGradient}" RowDefinitions="Auto,*">
+        <!-- Botón "Nuevo Usuario" -->
+        <Button Grid.Row="0" Text="Nuevo Usuario" Command="{Binding CreateCommand}" Style="{StaticResource ButtonStyle}" HeightRequest="50" Margin="20" />
+
+        <!-- Lista de usuarios -->
+        <ScrollView Grid.Row="1">
+            <CollectionView ItemsSource="{Binding UserList}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:User">
+                        <Frame BackgroundColor="#1AFFFFFF" CornerRadius="10" Padding="15" Margin="20,10">
+                            <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="*,Auto">
+                                <Label Grid.Row="0" Grid.Column="0" Text="Id:" FontAttributes="Bold" TextColor="White" />
+                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Id}" TextColor="White" HorizontalOptions="End" />
+
+                                <Label Grid.Row="1" Grid.Column="0" Text="Nombre:" FontAttributes="Bold" TextColor="White" />
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Name}" TextColor="White" HorizontalOptions="End" />
+
+                                <Label Grid.Row="2" Grid.Column="0" Text="Email:" FontAttributes="Bold" TextColor="White" />
+                                <Label Grid.Row="2" Grid.Column="1" Text="{Binding Email}" TextColor="White" HorizontalOptions="End" />
+
+                                <Label Grid.Row="3" Grid.Column="0" Text="RolId:" FontAttributes="Bold" TextColor="White" />
+                                <Label Grid.Row="3" Grid.Column="1" Text="{Binding Rol}" TextColor="White" HorizontalOptions="End" />
+
+                                <!-- Opciones de acción -->
+                                <StackLayout Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="20" Margin="0,15,0,0">
+                                    <Button Text="Editar" Style="{StaticResource ButtonStyle}"
+                                            Command="{Binding BindingContext.UpdateCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                            CommandParameter="{Binding}" />
+                                    <Button Text="Eliminar" Style="{StaticResource ButtonStyle}"
+                                            Command="{Binding BindingContext.DeleteCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                            CommandParameter="{Binding}" />
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+    </Grid>
 </ContentPage>
